@@ -1,41 +1,41 @@
-# FEVS Analysis
+# Documentation for FEVS_trend_correlation_agencies.ipynb
 
-This repository contains an analysis of the Federal Employee Viewpoint Survey (FEVS) data. The analysis is performed in the `FEVS_analysis.ipynb` Jupyter Notebook file.
+This Python file provides an analysis of the Federal Employee Viewpoint Survey (FEVS) data, specifically focusing on trends and correlations among various agency metrics. The file uses `pandas`, `matplotlib`, `seaborn`, and `scipy` libraries to perform the analysis and visualize the results.
 
-## Dataset
-The FEVS dataset used for this analysis is stored in the `full_FEVS_prototype.csv` file. The dataset includes responses from multiple years, with each year represented by a separate column in the dataset.
+## Functions
 
-## Analysis Framework
-The analysis starts by defining a framework for analyzing the data. The framework includes:
+### `barplot_select_column(df, selected_columns)`
+This function takes a DataFrame `df` and a list of selected columns `selected_columns` as input. It calculates the mean values for the selected columns and creates a bar plot to visualize the mean values. The function also adds labels and a title to the plot.
 
-- Lists of related variables ordered by year
-- Functions for mass visualization, such as creating bar plots of yearly changes in a variable
-- Functions for conducting ANOVA tests to compare average scores between different years
-- Functions for testing the normality of variables
+### `test_normality(df)`
+This function takes a DataFrame `df` as input. It performs the Shapiro-Wilk test for normality on the given data. If the p-value is greater than the significance level (0.05), it returns `True`, indicating that the data follows a normal distribution.
 
-## Initial Insights
-The analysis begins with the visualization of yearly changes in the variables. Some initial insights from the bar plots include:
+### `anova_test(df, variables)`
+This function takes a DataFrame `df` and a list of variables `variables` as input. It creates a new DataFrame from the selected variables and performs ANOVA tests between each year and the next year. The function prints the F-statistic and p-value for each comparison and determines if there is a significant difference between the groups based on the p-value.
 
-- There is a trend of increasing scores that tapers off and possibly lowers after 2020.
-- This trend may be attributed to the changes in work patterns due to the COVID-19 pandemic.
+### `heatmap_years(df)`
+This function takes a DataFrame `df` as input. It creates heatmaps to visualize the correlation between variables for each year. The function computes the correlation matrix, masks the upper triangle to focus on the lower triangle, and plots the heatmap using seaborn. It also prints a list of the variables sorted by their correlation strength, indicating their importance in the dataset.
 
-## ANOVA to Compare Average Scores between Different Years
-ANOVA (Analysis of Variance) is used as a statistical tool to compare the average scores between different years. The following steps are performed:
+### `agency_key_inspection(df)`
+This function takes a DataFrame `df` as input. It plots key variables for each agency and each year. The function selects the rows corresponding to a specific agency, retrieves the scores for the key variables, and creates a bar plot for each year. The function repeats this process for each agency in the dataset.
 
-1. Hypothesis formulation: The null hypothesis assumes that the average scores are the same across all years, while the alternative hypothesis assumes that the average scores are different across at least two years.
-2. Data organization: Each year is represented by a separate column in the dataset, with the scores recorded in the respective columns.
-3. Assumption checking: Preliminary checks are performed to evaluate the assumptions of ANOVA, such as the independence of observations, normality of data within each group, and homogeneity of variances across groups.
-4. ANOVA procedure: ANOVA tests are conducted to determine if there are significant differences in the average scores across the years.
-5. Result interpretation: If the p-value is below the predetermined significance level (e.g., α = 0.05), the null hypothesis is rejected, indicating significant differences in the average scores between at least two years. Post-hoc tests, such as Tukey's HSD test, can be performed to identify specific years with significantly different scores.
+### `key_score_plot(df)`
+This function takes a DataFrame `df` as input. It plots the average scores for three key variables (Employee Engagement: Intrinsic Work Experience, New IQ: Empowered, and Global Satisfaction) for each agency and each year. The function calculates the average scores for each year and creates a line plot to visualize the trend. It also calculates the difference between the last two years' scores and prints the difference for each agency.
 
-## Insights from ANOVA
-The analysis of the FEVS data reveals the following insights:
+## Usage
 
-- There is a trend showing a subtle increase in survey scores from 2015 to 2018, followed by a plateau and a general increase in scores in 2020. However, scores decrease in 2022.
-- ANOVA tests indicate significant differences between years of increase or decrease in scores, while plateau years do not show significant differences.
-- The cause of this trend could be attributed to various factors, which may be explored through policy analysis across government agencies, specifically NOAA.
-- The decrease in scores in 2022 may be related to the impact of COVID-19 and changes in policies affected by the pandemic. Further analysis can be conducted to identify specific policies and strategies to improve scores.
+The code starts by importing the necessary libraries and loading the FEVS dataset from a CSV file. It then defines several lists of columns representing different variables of interest.
 
-For detailed analysis and code implementation, please refer to the `FEVS_analysis.ipynb` notebook in this repository.
+Next, the code defines the aforementioned functions to perform various analyses and visualizations on the dataset.
 
-Please note that this is a summary of the analysis and further exploration and interpretation of the data may provide additional insights.
+The main part of the code consists of calling these functions to analyze and visualize the data. It includes:
+
+1. Bar plots of the mean scores for each variable by year.
+2. ANOVA tests to compare the average scores between consecutive years.
+3. Heatmaps showing the correlations between variables for each year.
+4. Bar plots of key variables for each agency and each year.
+5. Line plots of the average scores for key variables for each agency and each year.
+
+The code provides insights into the trends and correlations in the FEVS data, highlighting the importance of certain variables and their impact on employee engagement and job satisfaction.
+
+To use this code, you need to have the `pandas`, `matplotlib`, `seaborn`, and `scipy` libraries installed. You also need to provide the path
