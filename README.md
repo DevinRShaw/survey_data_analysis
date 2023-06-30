@@ -38,4 +38,4 @@ The main part of the code consists of calling these functions to analyze and vis
 
 The code provides insights into the trends and correlations in the FEVS data, highlighting the importance of certain variables and their impact on employee engagement and job satisfaction.
 
-To use this code, you need to have the `pandas`, `matplotlib`, `seaborn`, and `scipy` libraries installed. You also need to provide the path
+To use this code, you need to have the `pandas`, `matplotlib`, `seaborn`, and `scipy` libraries installed. You also need to provide the path to the FEVS csv which is contained int his repository.
